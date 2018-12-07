@@ -1,11 +1,30 @@
-# File setup.py
-def configuration(parent_package='',top_path=None):
-    from numpy.distutils.misc_util import Configuration
-    config = Configuration('',parent_package,top_path)
+from setuptools import setup, find_packages
 
-    config.add_extension('shicstats',
-                         sources = ['shicstats.pyf','utils.c'])
-    return config
-if __name__ == "__main__":
-    from numpy.distutils.core import setup
-    setup(**configuration(top_path='').todict())
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setup(name='diploshictest',
+      version='0.2',
+      description='DiploS/HIC',
+      long_description=long_description,
+      long_description_content_type="text/markdown",
+      url='https://github.com/jgallowa07/diploSHIC',
+      author='Andrew Kern',
+      author_email='',
+      license='MIT',      
+      packages=find_packages(exclude=[]),
+      install_requires=['numpy',
+                        'scipy',
+                        'pandas',
+                        'scikit-allel',
+                        'scikit-learn',
+                        'tensorflow',
+                        'keras'],
+      scripts=['diploshic/diploSHIC'],
+      zip_safe=False,
+      extras_require={
+          'dev': [],
+      },
+      setup_requires=[],
+)
+
